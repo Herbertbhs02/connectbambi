@@ -3,12 +3,13 @@ const User = require('../model/User')
 const router = require('express').Router()
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
+const {tokenSecret} = require('../Secret')
 
 const {validationregister,validationlogin} = require('../validation')
 
 
 router.post('/register', async(req,res)=>{
-
+console.log(req.body)
     //Validate the data before it's used
 //const {error} = schema.validate(req.body)
 const {error} = validationregister(req.body)
@@ -22,13 +23,14 @@ const {error} = validationregister(req.body)
 const salt = await bcrypt.genSalt(10)
 const hashedPassword = await bcrypt.hash(req.body.password, salt)
     const user = new User({
-        name:req.body.name,
+        firstName:req.body.firstName,
         email:req.body.email,
         password:hashedPassword
     });
     try{
         const savedUser = await user.save();
-        res.send({user:user._id})
+        //res.send({user:user._id})
+        res.send({user:user})
     }catch(error){
         res.status(400).send(error)
     }
@@ -45,9 +47,11 @@ router.post('/login', async(req, res)=>{
 const validPassword = await bcrypt.compare(req.body.password, user.password)
 if(!validPassword) return res.status(400).send('Password not correct')
 //Create and assign a token
-const token = jwt.sign({id:user._id},'123456789');
-res.header('auth-token',token).send(token)
-res.send('login')
+const token = jwt.sign({id:user._id},tokenSecret);
+res.header('auth-token',token).send({token,login:'successful login'})
+//res.send('login')
+
+
 
 })
 
