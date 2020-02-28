@@ -39,13 +39,13 @@ const hashedPassword = await bcrypt.hash(req.body.password, salt)
 router.post('/login', async(req, res)=>{
     const {error} = validationlogin(req.body)
   
-    if(error) return res.status(400).send(error.details[0].message)
+    if(error) return res.send({login:error.details[0].message})
     //Checking if the email already exist in the DB
     const user = await User.findOne({email:req.body.email})
-    if(!user) return res.status(400).send('Email not found')
+    if(!user) return res.send('Email not found')
 //password is correct
 const validPassword = await bcrypt.compare(req.body.password, user.password)
-if(!validPassword) return res.status(400).send('Password not correct')
+if(!validPassword) return res.send('Password not correct')
 //Create and assign a token
 const token = jwt.sign({id:user._id},tokenSecret);
 res.header('auth-token',token).send({token,login:'successful login'})
