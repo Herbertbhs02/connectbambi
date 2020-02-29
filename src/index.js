@@ -2,16 +2,13 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const authRoute = require('./routers/auth')
-const postRoute = require('./routers/search')
-const cors = require('cors');
 
 
 //MongoAltal URL
-
-const {BAMBI_CONNECT} = require('./Secret')
+const Secret = require('./Secret')
 
 //to connect to mongodb atlas-(cloud)
-mongoose.connect(BAMBI_CONNECT,
+mongoose.connect(Secret,
   { useNewUrlParser: true,
     useUnifiedTopology: true },
 
@@ -21,9 +18,7 @@ mongoose.connect(BAMBI_CONNECT,
 app.use(express.json());
 
 //Create router middleware
-app.use(cors());
  app.use('/api/user', authRoute);
-app.use('/api/search', postRoute)
 
 
 

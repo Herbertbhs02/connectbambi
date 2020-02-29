@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const userSchema = new mongoose.Schema({
-    firstName:{
+    name:{
         type:String,
         required:true,
         min:2,
