@@ -1,25 +1,28 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const cors = require('cors')
 const authRoute = require('./routers/auth')
-
+const searchdbRoute = require('./routers/searchdb')
 
 //MongoAltal URL
-const Secret = require('./Secret')
+const {BAMBI_CONNECT} = require('./Secret')
 
 //to connect to mongodb atlas-(cloud)
-mongoose.connect(Secret,
+mongoose.connect(BAMBI_CONNECT,
   { useNewUrlParser: true,
     useUnifiedTopology: true },
 
- ()=>console.log('connected to mongodb atlas'));
+ (error)=>console.log(`Connection requested`));
 
 //middleware
 app.use(express.json());
+app.use(cors());
 
 //Create router middleware
- app.use('/api/user', authRoute);
 
+ app.use('/api/user', authRoute);
+ app.use('/api/user', searchdbRoute);
 
 
 const port = process.env.PORT || 5000
