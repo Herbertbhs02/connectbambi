@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
         max:256
     },
 
-    sirname:{
+    surname:{
         type:String,
         required:true,
         min:2,
@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
         max:256,
         min:6
     },
+    message:{
+        type:String,
+        min:2,
+        max:1000
+    },   
     date:{
         type:Date,
         default:Date.now

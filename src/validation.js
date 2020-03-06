@@ -5,9 +5,10 @@ const validationregister = (data)=>{
 
     const schema = Joi.object({
         name:Joi.string().min(3).required(),
-        sirname:Joi.string().min(3).required(),
+        surname:Joi.string().min(3).required(),
         email:Joi.string().min(6).required().email(),
-        password:Joi.string().min(6).required()
+        password:Joi.string().min(6).required(),
+        message:Joi.string().min(2)
     })
 return schema.validate(data)
 }
