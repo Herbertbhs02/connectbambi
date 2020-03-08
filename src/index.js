@@ -5,9 +5,14 @@ const cors = require('cors')
 const authRoute = require('./routers/auth')
 const searchdbRoute = require('./routers/searchdb')
 const messageUpdateRoute = require('./routers/messageupdate')
+require('dotenv').config({path: __dirname + '/.env'})
+
+
+const BAMBI_CONNECT = process.env.BAMBI_CONNECT
+
 
 //MongoAltal URL
-const {BAMBI_CONNECT} = require('./Secret')
+
 
 //to connect to mongodb atlas-(cloud)
 mongoose.connect(BAMBI_CONNECT,
