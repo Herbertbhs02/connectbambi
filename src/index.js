@@ -5,6 +5,7 @@ const cors = require('cors')
 const authRoute = require('./routers/auth')
 const searchdbRoute = require('./routers/searchdb')
 const messageUpdateRoute = require('./routers/messageupdate')
+const listall = require('./routers/listall')
 require('dotenv').config({path: __dirname + '/.env'})
 
 
@@ -30,6 +31,7 @@ app.use(cors());
  app.use('/api/user', authRoute);
  app.use('/api/user', searchdbRoute);
  app.use('/api/user/', messageUpdateRoute);
+ app.use('/api/user/', listall);
 
 
 const port = process.env.PORT || 5000
