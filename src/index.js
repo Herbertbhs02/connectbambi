@@ -6,6 +6,10 @@ const authRoute = require('./routers/auth')
 const searchdbRoute = require('./routers/searchdb')
 const messageUpdateRoute = require('./routers/messageupdate')
 const listall = require('./routers/listall')
+const messages = require('./routers/messages')
+const retrieveMessages = require('./routers/retrievemessages')
+const deleteleftmessages = require('./routers/deleteleftmessages')
+
 require('dotenv').config({path: __dirname + '/.env'})
 
 
@@ -32,7 +36,9 @@ app.use(cors());
  app.use('/api/user', searchdbRoute);
  app.use('/api/user/', messageUpdateRoute);
  app.use('/api/user/', listall);
-
+ app.use('/api/messages/', messages);
+ app.use('/api/', retrieveMessages);
+ app.use('/api/', deleteleftmessages);
 
 const port = process.env.PORT || 5000
 app.listen(port, ()=>{

@@ -9,7 +9,7 @@ const {validationregister,validationlogin} = require('../validation')
 
 
 router.post('/register', async(req,res)=>{
-    console.log(req.body)
+    
     //Validate the data before it's used
 //const {error} = schema.validate(req.body)
 const {error} = validationregister(req.body)
@@ -49,7 +49,8 @@ const validPassword = await bcrypt.compare(req.body.password, user.password)
 if(!validPassword) return res.send({errorMessage:'Password not correct',status:400})
 //Create and assign a token
 const token = jwt.sign({id:user._id},'123456789');
-res.header('auth-token',token).send({token,id:user._id,name:user.name,status:200})
+res.header('auth-token',token).send({token,id:user._id,name:user.name,surname:user.surname
+    ,status:200})
 
 
 })
