@@ -30,13 +30,7 @@ const messagesSchema = new mongoose.Schema({
         min:2,
         max:1000
     }, 
-     
-    d:{
-        type:String,
-        required:true,
-        min:6,
-        max:1000
-    },
+    
     date:{
         type:Date,
         default:Date.now
