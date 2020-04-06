@@ -4,8 +4,8 @@ const router = require('express').Router()
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {validationregister,validationlogin} = require('../validation')
-require('dotenv').config({path: __dirname + '/.env'})
-
+require('dotenv').config({path: __dirname + '/../.env'})
+const tokenSecret = process.env.tokenSecret
 router.post('/register', async(req,res)=>{
     
     //Validate the data before it's used

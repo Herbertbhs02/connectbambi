@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 //const {tokenSecret} = require('../Secret')
 require('dotenv').config({path: __dirname + '/../.env'})
-
 const tokenSecret = process.env.tokenSecret
 
 module.exports =function (req,res,next){
