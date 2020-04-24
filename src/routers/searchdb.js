@@ -6,7 +6,7 @@ router.post('/searchdb',verify, async(req, res)=>{
     //use regex to search surnames with both lower and upper letter
     const surnameNospace =req.body.surname.trim()//remove white space
     
-const regex = new RegExp(["^",surnameNospace ].join(""), "gi");
+const regex = new RegExp(["^",surnameNospace, ].join(""), "gi");
     
     const user = await User.find({surname:regex})
     if(!user) return res.send('Name not found')
